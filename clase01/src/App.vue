@@ -22,14 +22,23 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <RouterLink class="nav-link active" aria-current="page" to="/">Home</RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink class="nav-link active" aria-current="page" to="/crear-cuenta">Register</RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink class="nav-link active" aria-current="page" to="/chat-global">Register</RouterLink>
+                    </li>
+                    <li class="nav-item">
+                        <RouterLink class="nav-link active" aria-current="page" to="/iniciar-sesion">Register</RouterLink>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <main class="container py-4">
-        <Home />
+        <RouterView />
     </main>
     <footer class="footer">
         <p>Da Vinci &copy; 2025</p>

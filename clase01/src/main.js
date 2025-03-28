@@ -21,7 +21,7 @@ Si escribimos solo un nombre, de ruta, sin prefijo, de ruta relativa o absoluta,
 Ejemplo:
   vue
 */
-
+import router from './router.js/router';
 import './style.css';
 import {createApp} from 'vue';  //importamos la función para crear la app de vue
 
@@ -29,6 +29,9 @@ import App from './App.vue'; //importamos el componente raíz
 
 //creamos la app, pasando el componente raíz
 const app = createApp(App);
+
+//registramos el router en la app
+app.use(router);
 
 //montamos la app en el div#app del [index.html]
 app.mount('#App');
