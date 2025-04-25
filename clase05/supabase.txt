@@ -1,0 +1,48 @@
+# Supabase
+
+https://supabase.com
+
+Supabase es un BaaS (backend as a service) qie se presenta a si misma como una alternativa open source a firebase
+
+Un BaaS es un programa que ofrece muchas de las funcionalidades de un backend ya pre-armadas, con la posibilidad en general de poder ser hosteado en la nube. Típicamente los BaaS suelen tener un servicio de hosting propio que se puede contratar. 
+
+Supabase ofrece las siguientes funcionalidades:
+
+- Base de datos (Postgres).
+- Autenticación.
+- Almacenamiento de archivos.
+- Funcionalidades en tiempo real.
+- "Edge functions" (funciones arbitrarias que podemos correr).
+
+## Cómo creo un proyecto de Supabase?
+Para crear un proyecto, necesitamos una cuenta, que podremos registrar gratuitamente
+
+Una vez inicidada sesión, van a caer en su dashboard
+desde ahí crean una organización.
+
+Dentro de una organización es donde pueden crear sus proyectos
+
+En el tier gratuito, supabase nos limita a 2 proyectos activos por vez
+La buena noticia es que podemos tener infinitos proyectos inactivos o pausados. Y podemos reanudar un proyecto tantas veces como queramos. Solo toma unos minutitos.
+
+
+## Armando nuestro chat
+Para trabajar con funcionalidades en tiempo real, necesitamos la API de Supabase de "Realtime".
+Tiene 3 mecanismos de uso: Broadcast, Presence, Postgres Changes.
+Vamos a hablar hoy del Broadcast
+
+La API de Broadcast está diseñada especialmente para comunicación en tiempo real muy rápida entre un importante volumen de usuarios conectados en simultáneo.
+
+Beneficios:
+- Alta performance.
+- Sencillez de implementación.
+
+Contras:
+- Los mensajes que se envían *no persisten* en el servidor.
+
+Para poder implementar cualquiera de las APIs, necesitamos descargar en nuestro proyecto el SDK / biblioteca del cliente de Supabase:
+
+    npm install @supabase/supabase-js
+
+Con el paquete instalado, necesitamos en nuestro código, iniciar el cliente de supabase.
+Esto lo vamos a hacer en un archivo [src/services/supabase.js].
