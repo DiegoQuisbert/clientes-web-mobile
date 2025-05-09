@@ -1,6 +1,7 @@
 <script>
 // Importamos el componente.
 import Home from './pages/Home.vue';
+import {logout, suscribeToAuthUserChanges } from './services/auth';
 
 // En la Options API, el script de los componentes debe exportar por default un
 // objeto de configuración del componente.
@@ -12,6 +13,27 @@ export default {
     // En la Options API, tenemos que declarar dentro el componente los otros
     // componentes que vamos a utilizar.
     components: { Home },
+    data() {
+        return {
+            user: {
+                id: null,
+                email: null,
+            },
+        }
+        
+    },
+    methods: {
+        handleLogout() {
+            logout();
+            //Repaso: cuando agregamos vue router en nuestra app, crea en todos los componentes, 2 propiedades, $router y $route. $router es una referenciadel objeto Router y $route una referencia del objeto ruta.
+            this.$router.push('/iniciar-sesion');
+        }
+    },
+    async mounted() {
+        // this.user = await getCurrentAuthUser();
+        //nos sucribimos a los cambios del usuario autenticado
+        suscribeToAuthUserChanges(newUserData => this.user = newUserData);
+    },
 }
 </script>
 
@@ -42,15 +64,31 @@ export default {
             <li>
                 <RouterLink to="/">Home</RouterLink>
             </li>
+            <template v-if="user.id !== null">
+            
             <li>
                 <RouterLink to="/chat-global">Chat Global</RouterLink>
             </li>
             <li>
+                <RouterLink to="/mi-perfil">Mi perfil</RouterLink>
+            </li>
+            <li>
+                <form
+                    action="#"
+                    @submit.prevent="handleLogout"
+                >
+                <button>{{ user.email }} (cerrar sesión) </button>
+                </form>
+            </li>
+            </template>
+            <template v-else>
+            <li>
                 <RouterLink to="/iniciar-sesion">Ingresar</RouterLink>
             </li>
             <li>
-                <RouterLink to="/crear-cuenta">Cuenta Cuenta</RouterLink>
+                <RouterLink to="/crear-cuenta">Crear Cuenta</RouterLink>
             </li>
+            </template>
         </ul>
     </nav>
     <main class="container p-4 mx-auto">
